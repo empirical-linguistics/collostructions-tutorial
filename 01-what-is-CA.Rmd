@@ -1,0 +1,19 @@
+---
+title: 'Collostructional analysis: A short primer'
+author: "Stefan Hartmann"
+date: "`r Sys.Date()`"
+---
+
+# What is collostructional analysis?
+
+Collostructional anlysis is a family of methods measuring associations and dissociations between (usually) words and (synactic) constructions. Its theoretical background is Construction Grammar, a theory of language that assumes that language can be exhaustively described as an inventory of form-meaning pairs. These form-meaning pairs are called constructions and exist at various levels of abstraction. For collostructional analysis, so-called partially filled constructions are particularly relevant, i.e. patterns with a lexically fixed part and a variable slot. Classic examples include idiomatic patterns like [X *waiting to happen*] or [*The* X-*er the* Y-*er*], but the method can be applied to much more abstract constructions as well (e.g. imperatives, discussed in Stefanowitsch & Gries 2003).
+
+Collostructional analysis comes in three major variants:
+
+- Simple collexeme analysis. This variant checks which slot fillers occur at above-chance level in one open slot of a construction, compared to the frequency of the same slot fillers in all other constructions. It is therefore particularly well-suited for patterns with one open slot, e.g. [X waiting to happen].
+
+- Distinctive collexeme analysis. This variant is used to compare two constructions by assessing which slot fillers occur with above-chance frequency in one construction compared to the other. Note that this variant only takes the frequencies of the slot fillers *within* the two constructions into account, i.e. the overall corpus frequencies are ignored.
+
+- Covarying collexeme analysis. This variant assesses which slot fillers occur together with above-chance frequency in a construction with two open slots such as [*The* X-*er the* Y-*er*]. Again, only the frequency of the slot fillers  *within* the construction is taken into account, i.e. the overall corpus frequencies are ignored.
+
+In Section 2, I will give a brief conceptual overview of the ideas behind collostructional analysis, its potential, and its limitations. The subsequent sections contain hands-on tutorials for each of the three variants of collostructional analysis, including extensions of distinctive collexeme analysis that allow for taking more than two constructions into account.

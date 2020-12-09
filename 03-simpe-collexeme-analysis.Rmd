@@ -1,0 +1,21 @@
+---
+title: 'Collostructional analysis: A short primer'
+author: "Stefan Hartmann"
+date: "`r Sys.Date()`"
+---
+
+# Simple collexeme analysis
+
+Simple collexeme analysis investigates relationships between pairs of constructions, typically between a syntactic construction and a lexical item (Stefanowitsch 2013). It requires four values that are entered into a contingecy table as shown in the table below: a)
+
+```{r scctable, echo=FALSE, warning = FALSE, message = FALSE}
+
+d_scc <- readxl::read_xlsx("data/simple_collexeme_analysis_overview.xlsx")
+colnames(d_scc)[1] <- ""
+
+knitr::kable(
+  d_scc, booktabs = TRUE,
+  caption = 'Frequency information needed for simple collexeme analysis'
+)
+
+```

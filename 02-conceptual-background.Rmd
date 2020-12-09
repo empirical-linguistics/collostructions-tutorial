@@ -1,0 +1,18 @@
+---
+title: 'Collostructional analysis: A short primer'
+author: "Stefan Hartmann"
+date: "`r Sys.Date()`"
+---
+
+# Conceptual background
+
+As pointed out above, collostructional analysis is couched in (usage-based) Construction Grammar. This approach assumes that language users generalize over the linguistic units they encounter, thus gradually building up an inventory of form-meaning pairs (constructions). Constructions differ in schematicity, from fully lexically specific constructions (e.g. idioms like *kick the bucket*) to fully schematic ones (e.g. the so-called ditransitive construction, instantiated in *She gave me a book* or *He baked me a cake*). In-between these two poles, there are partially filled constructions like [*the* X-*er the* Y-*er*]. Collostructional analysis is particularly well-suited to investigate the open slots in the latter.
+
+Usage-based construction grammar assumes that our linguistic knowledge is based on generalizations over actual usage events. This means that frequency distributions can be highly informative about the semantics of constructions. For example, the 'transfer' semantics of the ditransitive construction is reflected (and potentially explained) by the fact that transfer verbs like *give* occur with above-chance frequency in this construction.
+
+That also explains the appeal of collostructional analysis - it provides a simple and intuitive way of assessing association patterns between words and constructions, thus providing clues to semantic aspects of a construction. However, there has also been criticism. I won't go into detail here - instead, I'll just mention some contentious aspects and point to some references for further reading.
+
+- Bybee's (2010) criticism is, broadly speaking, concerned with the cognitive plausibility of the measure. She criticizes that "Gries and colleagues argue for their statistical method but do not propose a cognitive mechanism that corresponds to their analysis" (Bybee 2010: 100) and argues that working with raw token frequencies might be a superior approach. See Gries (2014) for a reply.
+
+- Schmid & Küchenhoff's (2013) criticism is more methodological in nature. Among other things, they take issue with the problem of "filling the fourth cell", which we will encounter again in the hands-on tutorial. From a more theoretical perspective, they discuss a problem already hinted at by Bybee, namely that, als Kilgarriff (2007) famously put it, "language is never ever ever random".
+

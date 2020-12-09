@@ -1,0 +1,20 @@
+book_filename: "coronamorphologie"
+language:
+  label:
+    fig: 'Fig. '
+    tab: 'Tab. '
+    eq: 'Gleichung '
+    thm: 'Theorem '
+    lem: 'Lemma '
+    cor: 'Corollary '
+    prp: 'Proposition '
+    cnj: 'Konjektur '
+    def: 'Definition '
+    exm: 'Bsp. '
+    exr: 'Übung '
+    proof: 'Beweis '
+    remark: 'Anm. '
+    solution: 'Lösung '
+delete_merged_file: true
+new_session: true
+output_dir: "docs"

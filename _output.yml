@@ -1,0 +1,17 @@
+bookdown::gitbook:
+   config:
+    toc:
+       collapse: null
+    sharing:
+        facebook: no
+        twitter: no
+        all: ['facebook', 'twitter', 'linkedin', 'weibo', 'instapaper']
+   toc_depth: 4
+       
+bookdown::pdf_book:
+    latex_engine: xelatex
+    keep_tex: yes
+    toc: true
+    toc_depth: 4
+    includes:
+        in_header: preamble.tex
