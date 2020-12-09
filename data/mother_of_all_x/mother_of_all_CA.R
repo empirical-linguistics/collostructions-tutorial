@@ -1,15 +1,15 @@
 library(tidyverse)
 library(collostructions)
-library(readxl)
 library(data.table)
 
+
 # read data ---------------------------------------------------------------
-d <- read_xlsx("mother_of_all_ENCOW.xlsx")
+d <- read_csv("mother_of_all_ENCOW.csv")
 
 
 # read DECOW frequency list -----------------------------------------------
 # (available from https://www.webcorpora.org/opendata/frequencies/english/encow16a/)
-encow <- fread("/Volumes/My Passport/ENCOW word lists/encow16ax.lp.tsv",
+encow <- fread("../encow16ax.lp.tsv",
                header = F)
 
 # only nouns
@@ -35,6 +35,8 @@ d_tbl <- left_join(d_tbl, encow, by = "Lemma")
 # smaller than cxn frequency
 d_tbl <- subset(d_tbl, d_tbl[,2] <= d_tbl[,3])
 
-
 # perform collexeme analysis
-collex(d_tbl, corpsize = sum(encow$Freq)) %>% write_excel_csv("simple_collexeme_analysis.csv")
+d_collex <- collex(d_tbl, corpsize = sum(encow$Freq)) 
+
+# explore results
+d_collex %>% head(10)
