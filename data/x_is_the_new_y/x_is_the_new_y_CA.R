@@ -1,11 +1,8 @@
 
-
 # packages ----------------------------------------------------------------
-
-
 library(tidyverse)
 library(collostructions) # available at sflach.ch
-
+library(ngram)
 
 # helper functions --------------------------------------------------------
 
@@ -28,8 +25,10 @@ d <- filter(d, keep == "y")
 
 # add wordcount for x and y lemmas ----------------------------------------
 
-d$wordcount_x <- sapply(1:nrow(d), function(i) wordcount(trimws(d$Lemma_x[i])))
-d$wordcount_y <- sapply(1:nrow(d), function(i) wordcount(trimws(d$Lemma_y[i])))
+d$wordcount_x <- sapply(1:nrow(d), 
+                        function(i) wordcount(trimws(d$Lemma_x[i])))
+d$wordcount_y <- sapply(1:nrow(d), 
+                        function(i) wordcount(trimws(d$Lemma_y[i])))
 
 
 
@@ -79,6 +78,20 @@ for(i in 1:nrow(d)) {
 # covarying collexeme analysis --------------------------------------------
 
 # d %>% select(head_x, head_y) %>% as.data.frame %>% collex.covar %>% pretty_df() %>% write_excel_csv("collex_covar_x_is_the_new_y_ENCOW.csv")
-d_covar <- d %>% select(head_x, head_y) %>% as.data.frame %>% collex.covar 
-d_covar %>% head(10)
+d_covar <- d %>% 
+  select(head_x, head_y) %>% 
+  as.data.frame %>% collex.covar 
+d_covar %>% tail(10)
+
+# same without "black"
+d_covar2 <- d %>% 
+  select(head_x, head_y) %>% 
+  filter(head_y != "black") %>%
+  as.data.frame %>% collex.covar 
+d_covar2 %>% tail(10)
+
+
+d <- tibble(a = c(1:5), b = c(1:5))
+d$c <- NA
+d$c[1] <- "bla"
 

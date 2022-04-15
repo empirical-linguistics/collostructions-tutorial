@@ -1,2 +1,7 @@
+tab:scctable
+tab:scctableexample
 introduction
 what-is-collostructional-analysis
+conceptual-background
+simple-collexeme-analysis
+references

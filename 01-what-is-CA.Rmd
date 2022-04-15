@@ -4,6 +4,7 @@ author: "Stefan Hartmann"
 date: "`r Sys.Date()`"
 ---
 
+
 # What is collostructional analysis?
 
 Collostructional anlysis is a family of methods measuring associations and dissociations between (usually) words and (synactic) constructions. Its theoretical background is Construction Grammar, a theory of language that assumes that language can be exhaustively described as an inventory of form-meaning pairs. These form-meaning pairs are called constructions and exist at various levels of abstraction. For collostructional analysis, so-called partially filled constructions are particularly relevant, i.e. patterns with a lexically fixed part and a variable slot. Classic examples include idiomatic patterns like [X *waiting to happen*] or [*The* X-*er the* Y-*er*], but the method can be applied to much more abstract constructions as well (e.g. imperatives, discussed in Stefanowitsch & Gries 2003).

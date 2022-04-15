@@ -6,15 +6,32 @@ date: "`r Sys.Date()`"
 
 # References
 
+
+Bergs, Alexander. 2019. What, if anything, is linguistic creativity? Gestalt Theory 41(2). 173–183.
+
 Flach, Susanne. 2017. collostructions: An R Implementation for the Family of Collostructional Methods.
+
 Gries, Stefan Th. 2015. More (old and new) misunderstandings of collostructional analysis: On Schmid and Küchenhoff (2013). Cognitive Linguistics 26(3). 505–536.
+
 Gries, Stefan Th. 2019. 15 years of collostructions: Some long overdue additions/corrections (to/of actually all sorts of corpus-linguistics measures). International Journal of Corpus Linguistics 24(3). 385–412.
+
 Gries, Stefan Th. & Anatol Stefanowitsch. 2004. Extending Collostructional Analysis: A Corpus-Based Perspective on “Alternations.” International Journal of Corpus Linguistics 9(1). 97–129.
+
 Hilpert, Martin. 2010. The force dynamics of English complement clauses: A collostructional analysis. In Dylan Glynn & Kerstin Fischer (eds.), Quantitative Methods in Cognitive Semantics: Corpus-Driven Approaches, 155–178. Berlin, New York: De Gruyter.
+
 Hilpert, Martin. 2012. Diachronic Collostructional Analysis Meets the Noun Phrase: Studying MANY A NOUN in COHA. In Terttu Nevalainen & Elizabeth Closs Traugott (eds.), The Oxford Handbook of the History of English, 233–244. Oxford: Oxford University Press.
+
 Küchenhoff, Helmut & Hans-Jörg Schmid. 2015. Reply to “More (old and new) misunderstandings of collostructional analysis: On Schmid &amp; Küchenhoff” by Stefan Th. Gries. Cognitive Linguistics 26(3). 537–547.
+
+Schäfer, Roland & Felix Bildhauer. 2012. Building Large Corpora from the Web Using a New Efficient Tool Chain. In Nicoletta Calzolari, Khalid Choukri, Terry Declerck, Mehmet Uğur Doğan, Bente Maegaard, Joseph Mariani, Asuncion Moreno, Jan Odijk & Stelios Piperidis (eds.), Proceedings of LREC 2012, 486–493.
+
 Schmid, Hans-Jörg & Helmut Küchenhoff. 2013. Collostructional Analysis and other Ways of Measuring Lexicogrammatical Attraction: Theoretical Premises, Practical Problems and Cognitive Underpinnings. Cognitive Linguistics 24(3). 531–577.
+
 Stefanowitsch, Anatol. 2013. Collostructional Analysis. In Thomas Hoffmann & Graeme Trousdale (eds.), The Oxford Handbook of Construction Grammar, 290–306. Oxford: Oxford University Press.
+
 Stefanowitsch, Anatol & Stefan Th. Gries. 2003. Collostructions: Investigating the Interaction of Words and Constructions. International Journal of Corpus Linguistics 8(2). 209–243.
+
+Ungerer, Tobias & Stefan Hartmann. 2020. Delineating extravagance: Assessing speakers’ perceptions of imaginative constructional patterns. Belgian Journal of Linguistics 34. 345–356.
+
 Wiechmann, Daniel. 2008. On the computation of collostruction strength: Testing measures of association as expressions of lexical bias. Corpus Linguistics and Linguistic Theory 4(2). 253–290.
 

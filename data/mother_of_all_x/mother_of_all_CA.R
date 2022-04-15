@@ -25,7 +25,11 @@ setnames(encow, old = "V1", new = "Freq")
 d <- filter(d, keep == "y")
 
 # get frequencies
-d_tbl <- d %>% select(lemma) %>% table %>% sort(decreasing = T) %>% as.data.frame(stringsAsFactors = F)
+d_tbl <- d %>% select(lemma) %>% 
+  table %>% 
+  sort(decreasing = T) %>% 
+  as.data.frame(stringsAsFactors = F)
+
 colnames(d_tbl) <- c("Lemma", "Freq_in_cxn")
 
 # join tables
@@ -39,4 +43,4 @@ d_tbl <- subset(d_tbl, d_tbl[,2] <= d_tbl[,3])
 d_collex <- collex(d_tbl, corpsize = sum(encow$Freq)) 
 
 # explore results
-d_collex %>% head(10)
+d_collex %>% head(20)

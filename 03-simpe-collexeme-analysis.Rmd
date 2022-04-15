@@ -6,11 +6,15 @@ date: "`r Sys.Date()`"
 
 # Simple collexeme analysis
 
-Simple collexeme analysis investigates relationships between pairs of constructions, typically between a syntactic construction and a lexical item (Stefanowitsch 2013). It requires four values that are entered into a contingecy table as shown in the table below: a)
+Simple collexeme analysis investigates relationships between pairs of constructions, typically between a syntactic construction and a lexical item (Stefanowitsch 2013). It requires four values that are entered into a contingency table as shown in the table below: a) the frequency of a particular lexeme in a given construction; b) the frequency of all other lexemes in the same construction; c) the frequency of the lexeme in question outside of the given construction (i.e., in all other constructions); d) the frequency of all other lexemes outside of the construction. Table \@ref(tab:scctable) summarizes the input that is needed for each of the four cells.
 
 ```{r scctable, echo=FALSE, warning = FALSE, message = FALSE}
 
-d_scc <- readxl::read_xlsx("data/simple_collexeme_analysis_overview.xlsx")
+# load packages
+library(tidyverse)
+library(readxl)
+
+d_scc <- readxl::read_xlsx("/Users/stefanhartmann/sciebo/Tutorials/collostructions_tutorial/data/overview_tables/simple_collexeme_analysis_overview.xlsx", sheet = 1)
 colnames(d_scc)[1] <- ""
 
 knitr::kable(
@@ -19,3 +23,222 @@ knitr::kable(
 )
 
 ```
+
+
+Admittedly, Table \@ref(tab:scctable) is a bit hard to read, so it is probably helpful to work with examples. In the following, I will draw on so-called snowclones, i.e. extravagant formulaic patterns with an open slot and usually with a lexically fixed source phrase (see e.g. Bergs 2019, Ungerer & Hartmann 2020), to illustrate collostructional analysis. Consider, for instance, [*the mother of all* X], which is often mentioned as a paradigm example of a snowclone, as there is a relatively clear source (Saddam Hussein's "the mother of all bombs"), and it is used productively with a broad ramge of variation in the PP-internal noun slot. 
+
+For getting hands-on experience, let us read in a dataset from the webcorpus ENCOW16A (Schäfer & Bildhauer 2012). These data have been compiled and annotated by Tobias Ungerer and myself in the context of a joint project on snowclones.
+
+
+```{r motherofall01, message = F}
+
+# read data
+moa <- read_csv("data/mother_of_all_x/mother_of_all_ENCOW.csv")
+
+# exclude false hits
+moa <- filter(moa, keep == "y")
+
+# print summary table
+tibble(
+  `number of tokens` = nrow(moa),
+  `number of types` = length(unique(moa$lemma)),
+  `Frequency of hangover` = length(which(moa$lemma=="hangover"))
+) %>% kableExtra::kable()
+
+
+```
+
+A simple collexeme analysis can be used to check which lexemes occur with above-chance frequency in this slot, and which lexemes are rarer than we would expect, given a chance distribution. Take, for example, the lexical item *hangover*. To compute the collostruction strength of *hangover*, we have to fill the four cells as shown in Table \@ref(tab:scctableexample).
+
+
+```{r scctableexample, echo=FALSE, warning = FALSE, message = FALSE}
+
+d_scc <- readxl::read_xlsx("data/overview_tables/simple_collexeme_analysis_overview.xlsx", sheet = 2)
+colnames(d_scc)[1] <- ""
+
+knitr::kable(
+  d_scc, booktabs = TRUE,
+  caption = 'Example contingency table for one slot filler'
+)
+
+```
+
+
+The phrase *the mother of all hangovers* occurs `r length(which(moa$lemma=="hangover"))` times in the corpus. Altogether, [*mother of all* X] is attested `r nrow(moa)` times in the corpus. The term *hangover* occurs a bit more than 18,000 times in the corpus, as a look at the ENCOW lemma list shows (available [here](https://www.webcorpora.org/opendata/frequencies/english/encow16a//).) 
+
+```{r, message = FALSE}
+
+# For this tutorial, I've compiled a lemma list
+# containing only the lemmas attested in the "mother of all"
+# construction using this commented-out code:
+
+library(vroom)
+# encow <- vroom("/Users/stefanhartmann/sciebo/Tutorials/collostructions_tutorial/data/encow16ax.lp.tsv", col_names = c("Lemma", "POS", "Freq"))
+# encow[grep("N.*", encow$POS),]$Freq %>% sum # 4091470964
+
+# encow <- filter(encow, Lemma %in% moa$lemma)
+# write_excel_csv(encow, "data/moa_encow_freqs.csv")
+
+encow <- read_csv("data/moa_encow_freqs.csv")
+
+# some lemmas occur twice with different pos tags,
+# so we first filter out nouns and then
+# summarize all that occur with different noun tags
+encow <- encow[grep("N.*", encow$POS),]
+
+encow <- encow %>% group_by(Lemma) %>% summarise(
+  Lemma = Lemma,
+  Freq = sum(Freq)
+) %>% unique()
+
+encow[which(encow$Lemma=="hangover"),]
+
+```
+
+Finally, we can compute the value for filling the fourth cell by obtaining the sum of all nouns in the corpus (from and then subtracting the values the fill the other cell of course). The total number of nouns in the corpus is `r sum(encow$Freq)`:
+
+```{r}
+
+sum(encow$Freq)
+
+```
+
+It is, however, not always easy to decide which value should enter the fourth cell (collostructional analysis has sometimes been criticized for this, see e.g. Schmid & Küchenhoff 2013, Gries 2013). For example, regarding the  [*mother of all* N] construction, one could discuss whether the value of the fourth cell should be the frequency of *all* other nouns in the corpus, including proper names, or whether proper names should be excluded (especially if they are not attested in the construction, which could be seen as evidence that the construction does not readily combine with proper names). 
+
+Anyway, we will work with the full set of nouns here, without excluding proper names, as examples like *the mother of all Karens* seem perfectly possible. We can thus fill our cells as follows:
+
+```{r, message=FALSE}
+
+# the mother of all hangovers:
+a <- moa %>% filter(lemma == "hangover") %>% nrow()
+
+# the mother of all ¬hangovers:
+b <- moa %>% filter(lemma != "hangover") %>% nrow()
+
+# ¬(the mother of all) hangovers:
+c <- encow[which(encow$Lemma=="hangover"),]$Freq - a
+
+# ¬(the mother of all) ¬hangovers:
+# the sum of 4091470964 has been calculated from the full
+# ENCOW lemma frequency list
+d <- 4091470964 - a - b - c
+
+
+# table:
+tibble(
+  a = a,
+  b = b,
+  c = c,
+  d = d
+) %>% kableExtra::kable()
+
+```
+
+
+Using those values, we can now compute an association measure. For the sake of simplicity, we will use the chi-squared test here. Stefanowitsch & Gries (2003) use the Fisher-Yates exact test.
+
+```{r, message=FALSE}
+
+matrix(c(a,b,c,d), nrow = 2) %>% chisq.test()
+
+```
+
+Thus, according to the chi-squared test, the lexeme *hangover* occurs significantly more often in the [*mother of all* N] constructions than would be expected given a chance distribution. This also becomes clear if we compare the observed distribution to the expected one, which we can compute using R's function for the chi-squared test, `chisq.test()`, which automatically computes expected frequencies. In the table below, the expected values are given in parantheses:
+
+
+```{r, message = FALSE}
+
+# expected:
+exp <- matrix(c(a,b,c,d), nrow = 2) %>% chisq.test()
+exp <- exp$expected
+
+# observed:
+obs <-  matrix(c(a,b,c,d), nrow = 2)
+
+tibble(
+  `x` = c("mother", "not mother"),
+  hangover = c(paste0(obs[1], " (", round(exp[1], digits = 3), ")"),
+  paste0(obs[3], " (", round(exp[3], digits = 3), ")")),
+  not_hangover = c(paste0(obs[2], " (", round(exp[2], digits = 3), ")"), paste0(obs[4], " (", round(exp[4], digits = 3), ")"))
+  
+) %>% kableExtra::kable()
+
+
+
+```
+
+Of course we want to compute the collostruction strength not only for this one lexeme, but for all that occur in our dataset. We could write a function that automatizes what we've done so far; but luckily, Susanne Flach has already done that for us, and developed an entire R package dedicated to collostructional analysis. It is not (yet) available on CRAN but you can download it on [her website](https://sfla.ch/collostructions/). After installing it following the instructions given there, you should be able to load it:
+
+```{r}
+
+library(collostructions)
+
+```
+
+The input that the package expects is simple - just check the documentation of the individual functions, for simple collexeme analysis `?collex`, where it says that the first argument to be provided to the function should be "[a] data frame with types in a construction in column 1 (WORD), construction frequencies in column 2 (CXN.FREQ) and corpus frequencies in column 3 (CORP.FREQ)." Thus, we have to create a joint dataframe first - currently, the corpus frequencies for the first two cells are in the dataframe named `moa`, while the construction frequencies for the two remaining cells are in the dataframe `encow`. We first use the `table` function to get a dataframe containing the frequency of each lexeme in the [*mother of all* N] construction...
+
+```{r}
+
+# frequency within "other of all"
+tbl1 <- moa %>% 
+  select(lemma) %>% # select the "lemma" column
+  table %>% # tabulate
+  as_tibble() %>%  # convert to dataframe
+  setNames(c("Lemma", "Freq_mother")) # set the column names
+
+
+```
+
+... and then join this table with the list of corpus frequencies, `encow`:
+
+```{r}
+
+tbl1 <- left_join(tbl1, encow)
+
+```
+
+
+Note that in this case, we don't have to explicitly specify by which columns we want to join the data because there's a column called "Lemma" in both dataframes, so the `left_join` function automatically uses the "Lemma" column as the variable to join by. If the columns had different names, say "Lemma" and "lemma", we would have had to specify the columns explicitly, e.g. `left_join(tbl1, encow, by = c("lemma" = "Lemma"))`. 
+
+Note that tbl1 conforms to the input required by the `collex` function, as cited above: The word in the first column, the construction frequency of each lexical item in the second, and its corpus frequency in the third. With the numbers in the second and third column of our new dataframe `tbl1`, we can fill the first two cells of our contingency table. Now you may wonder what happened to the third and fourth cells. Well, both can be easily computed as soon as we have the total number of words belonging to a certain category (in our case, nouns) in the corpus. We have seen above that ENCOW16A contains 4091470964 nouns. We can provide this value to `collex` as the `corpsize` argument. Thus, we have everything we need to do the simple collexeme analysis. However, the following line of code throws an error:
+
+```{r, error = TRUE}
+
+collex(tbl1, corpsize = 4091470964)
+
+```
+
+Why? The answer is simple, but maybe not obvious. In the `moa` dataframe, we are dealing with manually annotated data. Tobias and I have corrected the lemmatization of the individual lexemes because we wanted to have a reliable picture of their frequency in the construction. This is not possible for the entire corpus of course. This is why there are some lexemes that are attested in our [*mother of all* N] dataset, but not in the corpus (because there, they are lemmatized as "<unknown>" or with a wrong lemma). As the error message above shows, they have a frequency value of NA. We can replace NA by 0 in such cases using the helpful `replace_na` function:
+
+```{r}
+
+tbl1 <- tbl1 %>% replace_na(list(Freq = 0))
+
+```
+
+Will this help?
+
+```{r, error = TRUE}
+
+collex(tbl1, corpsize = 4091470964)
+
+```
+
+Not really, as the function complains about the same rows again - rightly so, because it doesn't make much sense to look at items that are, at least according to the lemmatization of the corpus, not attested at all in our database. It would be like counting the number of apples drawn from a bag of pears. There are several ways to solve this problem. If we wanted to have very precise results, we could manually query the corpus for the tokens that are only attested in the [*mother of all* N] database, ideally taking spelling variants into account, thus obtaining the corpus frequency for each of the affected lexical items individually. Given the low frequency of the affected lemmas in the construction, however, this seems rather unnecessary. Personally, I tend to exclude those items (and make this transparent when I'm reporting the results in a paper).
+
+```{r}
+
+tbl1 <- tbl1[which(tbl1$Freq_mother <= tbl1$Freq),]
+
+```
+
+Now we have a table that should work as input for `collex`:
+
+```{r}
+
+tbl1 %>% collex() %>% DT::datatable()
+
+```
+
+Et voilà, we have a collexeme table we can work with - for example, by interpreting the results: Among other things, it is interesting to see that the items most strongly attracted to the construction tend to have a negative semantic prosody, with many of them being rather colloquiual, which might contribute to the "extravagant" nature of the construction.
+
