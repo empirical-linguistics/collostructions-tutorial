@@ -17,6 +17,6 @@ Collostructional analysis comes in three major variants:
 
 - Covarying collexeme analysis. This variant assesses which slot fillers occur together with above-chance frequency in a construction with two open slots such as [*The* X-*er the* Y-*er*]. Again, only the frequency of the slot fillers  *within* the construction is taken into account, i.e. the overall corpus frequencies are ignored.
 
-In Section 2, I will give a brief conceptual overview of the ideas behind collostructional analysis, its potential, and its limitations. The subsequent sections contain hands-on tutorials for each of the three variants of collostructional analysis, including extensions of distinctive collexeme analysis that allow for taking more than two constructions into account.
+In Section \@ref{cba}, I will give a brief conceptual overview of the ideas behind collostructional analysis, its potential, and its limitations. The subsequent sections contain hands-on tutorials for each of the three variants of collostructional analysis, including extensions of distinctive collexeme analysis that allow for taking more than two constructions into account.
 
 The subsequent sections discuss the three major variants of collostructional analysis using hands-on examples. The datasets used there can be downloaded from the "data" folder in this tutorial's [Github repository](https://github.com/empirical-linguistics/collostructions-tutorial/tree/main/data).

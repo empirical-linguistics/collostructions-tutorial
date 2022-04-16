@@ -9,7 +9,7 @@ date: "`r Sys.Date()`"
 
 Bergs, Alexander. 2019. What, if anything, is linguistic creativity? Gestalt Theory 41(2). 173–183.
 
-Flach, Susanne. 2017. collostructions: An R Implementation for the Family of Collostructional Methods.
+Flach, Susanne. 2021. collostructions: An R Implementation for the Family of Collostructional Methods. www.sfla.ch.
 
 Goldberg, Adele E. 1995. Constructions: A Construction Grammar Approach to Argument Structure. Chicago, London: The University of Chicago Press.
 

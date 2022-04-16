@@ -14,7 +14,7 @@ Despite those differences, let us compare the N slots in the [*mother of all* N]
 
 The basic contingency table for distinctive collemexe analysis is shown in Table \@ref(tab:dca_tbl).
 
-```{r dca_tbl}
+```{r dca_tbl, echo = FALSE}
 
 d_scc <- readxl::read_xlsx("data/overview_tables/distinctive_collexeme_analysis_overview.xlsx", sheet = 1)
 colnames(d_scc)[1] <- ""
@@ -29,7 +29,7 @@ knitr::kable(
 Again, this table is easier to understand if we translate it to our example, i.e. the comparison between [*mother of all* N] and [ADJ-*est* N *ever*] (where we ignore the ADJ slot and only focus on the N slot):
 
 
-```{r dca_tbl2}
+```{r dca_tbl2, echo = FALSE}
 
 d_scc <- readxl::read_xlsx("data/overview_tables/distinctive_collexeme_analysis_overview.xlsx", sheet = 2)
 colnames(d_scc)[1] <- ""

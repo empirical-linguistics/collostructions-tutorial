@@ -59,7 +59,7 @@ xnewy %>% select(Lemma_x, Lemma_y) %>% collex.covar(raw = T) %>% DT::datatable()
 
 Unsurprisingly, the terms that tend to occur together come from similar domains, as in *small is the new big*, *x is the new y*, *transparency is the new objectivity*. *Doll-art is the new anarchy* is a bit surprising, but that might be an artifact of the corpus, which sometimes contains the same text(s) multiple times, which can distort the results. A quick look at the corpus data confirms this assumption:
 
-```{r, out.width='75%', fig.align="center", fig.cap="Concordance for \"doll art\" in ENCOW"}
+```{r, echo = FALSE, out.width='75%', fig.align="center", fig.cap="Concordance for \"doll art\" in ENCOW"}
 
 knitr::include_graphics("fig/dollart.png")
 

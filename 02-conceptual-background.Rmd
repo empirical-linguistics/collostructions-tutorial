@@ -4,7 +4,7 @@ author: "Stefan Hartmann"
 date: "`r Sys.Date()`"
 ---
 
-# Conceptual background
+# Conceptual background {#cba}
 
 As pointed out above, collostructional analysis is couched in (usage-based) Construction Grammar. This approach assumes that language users generalize over the linguistic units they encounter, thus gradually building up an inventory of form-meaning pairs (constructions). Constructions differ in schematicity, from fully lexically specific constructions (e.g. idioms like *kick the bucket*) to fully schematic ones (e.g. the so-called ditransitive construction, instantiated in *She gave me a book* or *He baked me a cake*). In-between these two poles, there are partially filled constructions like [*the* X-*er the* Y-*er*]. Collostructional analysis is particularly well-suited to investigate the open slots in the latter.
 
