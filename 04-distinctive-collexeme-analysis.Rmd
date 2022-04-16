@@ -146,3 +146,5 @@ tbl1 %>% select(Lemma, Freq_mother, Freq_ever) %>% collex.dist(reverse = TRUE) %
 ```
 
 Comparing the distinctive collexemes of both constructions is quite instructive - overall, it seems as if [*mother of all* N] tends to combine more with abstract concepts and nouns denoting events, while [ADJ-*est* N *ever*] combines with terms that denote more concrete/individuated concepts like persons, objects, cultural products etc.
+
+

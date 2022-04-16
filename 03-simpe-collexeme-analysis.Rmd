@@ -66,7 +66,7 @@ knitr::kable(
 ```
 
 
-The phrase *the mother of all hangovers* occurs `r length(which(moa$lemma=="hangover"))` times in the corpus. Altogether, [*mother of all* X] is attested `r nrow(moa)` times in the corpus. The term *hangover* occurs a bit more than 18,000 times in the corpus, as a look at the ENCOW lemma list shows (available [here](https://www.webcorpora.org/opendata/frequencies/english/encow16a//).) 
+The phrase *the mother of all hangovers* occurs `r length(which(moa$lemma=="hangover"))` times in the corpus. Altogether, [*mother of all* X] is attested `r nrow(moa)` times in the corpus. The term *hangover* occurs a bit more than 18,000 times in the corpus, as a look at the ENCOW lemma list shows (available [here](https://www.webcorpora.org/opendata/frequencies/english/encow16a//).) This list can also be used to obtain the total frequency of all nouns in the corpus, which is a value that we will need later on. I've commented out the code, but you can uncomment it and try it out with the downloaded frequency list from webcorpora.org.
 
 ```{r, message = FALSE}
 
@@ -74,9 +74,16 @@ The phrase *the mother of all hangovers* occurs `r length(which(moa$lemma=="hang
 # containing only the lemmas attested in the "mother of all"
 # construction using this commented-out code:
 
-library(vroom)
+# library(vroom) # for fast processing of large files
 # encow <- vroom("/Users/stefanhartmann/sciebo/Tutorials/collostructions_tutorial/data/encow16ax.lp.tsv", col_names = c("Lemma", "POS", "Freq"))
-# encow[grep("N.*", encow$POS),]$Freq %>% sum # 4091470964
+
+## only nouns:
+## filter using the Penn POS tags used in ENCOW
+# encow[encow$POS %in% c("NN", 
+#                        "NNS", 
+#                        "NNP", 
+#                        "NNPS"),]$Freq %>% sum # 1805183579
+
 
 # encow <- filter(encow, Lemma %in% moa$lemma)
 # write_excel_csv(encow, "data/moa_encow_freqs.csv")
@@ -97,7 +104,7 @@ encow[which(encow$Lemma=="hangover"),]
 
 ```
 
-Finally, we can compute the value for filling the fourth cell by obtaining the sum of all nouns in the corpus (from and then subtracting the values the fill the other cell of course). The total number of nouns in the corpus is 4091470964 (this is the number we get from summing up the frequencies of lemmas tagged as nouns in the entire lemma frequency list linked above).
+Finally, we can compute the value for filling the fourth cell by obtaining the sum of all nouns in the corpus (from and then subtracting the values the fill the other cell of course). The total number of nouns in the corpus is 1805183579 (this is the number we get from summing up the frequencies of lemmas tagged as nouns in the entire lemma frequency list linked above).
 
 It is, however, not always easy to decide which value should enter the fourth cell (collostructional analysis has sometimes been criticized for this, see e.g. Schmid & Küchenhoff 2013, Gries 2013). For example, regarding the  [*mother of all* N] construction, one could discuss whether the value of the fourth cell should be the frequency of *all* other nouns in the corpus, including proper names, or whether proper names should be excluded (especially if they are not attested in the construction, which could be seen as evidence that the construction does not readily combine with proper names). 
 
@@ -115,9 +122,9 @@ b <- moa %>% filter(lemma != "hangover") %>% nrow()
 c <- encow[which(encow$Lemma=="hangover"),]$Freq - a
 
 # ¬(the mother of all) ¬hangovers:
-# the sum of 4091470964 has been calculated from the full
+# the sum of 1805183579 has been calculated from the full
 # ENCOW lemma frequency list
-d <- 4091470964 - a - b - c
+d <- 1805183579 - a - b - c
 
 
 # table:
@@ -196,11 +203,11 @@ tbl1 <- left_join(tbl1, encow)
 
 Note that in this case, we don't have to explicitly specify by which columns we want to join the data because there's a column called "Lemma" in both dataframes, so the `left_join` function automatically uses the "Lemma" column as the variable to join by. If the columns had different names, say "Lemma" and "lemma", we would have had to specify the columns explicitly, e.g. `left_join(tbl1, encow, by = c("lemma" = "Lemma"))`. 
 
-Note that tbl1 conforms to the input required by the `collex` function, as cited above: The word in the first column, the construction frequency of each lexical item in the second, and its corpus frequency in the third. With the numbers in the second and third column of our new dataframe `tbl1`, we can fill the first two cells of our contingency table. Now you may wonder what happened to the third and fourth cells. Well, both can be easily computed as soon as we have the total number of words belonging to a certain category (in our case, nouns) in the corpus. We have seen above that ENCOW16A contains 4091470964 nouns. We can provide this value to `collex` as the `corpsize` argument. Thus, we have everything we need to do the simple collexeme analysis. However, the following line of code throws an error:
+Note that tbl1 conforms to the input required by the `collex` function, as cited above: The word in the first column, the construction frequency of each lexical item in the second, and its corpus frequency in the third. With the numbers in the second and third column of our new dataframe `tbl1`, we can fill the first two cells of our contingency table. Now you may wonder what happened to the third and fourth cells. Well, both can be easily computed as soon as we have the total number of words belonging to a certain category (in our case, nouns) in the corpus. We have seen above that ENCOW16A contains 1805183579 nouns. We can provide this value to `collex` as the `corpsize` argument. Thus, we have everything we need to do the simple collexeme analysis. However, the following line of code throws an error:
 
 ```{r, error = TRUE}
 
-collex(tbl1, corpsize = 4091470964)
+collex(tbl1, corpsize = 1805183579)
 
 ```
 
@@ -216,7 +223,7 @@ Will this help?
 
 ```{r, error = TRUE}
 
-collex(tbl1, corpsize = 4091470964)
+collex(tbl1, corpsize = 1805183579)
 
 ```
 
