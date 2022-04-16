@@ -1,8 +1,12 @@
 tab:scctable
 tab:scctableexample
+tab:ccatable1
+tab:ccatable2
+fig:unnamed-chunk-26
 introduction
 what-is-collostructional-analysis
 conceptual-background
 sca
 distinctive-collexeme-analysis
+covarying-collexeme-analysis
 references
