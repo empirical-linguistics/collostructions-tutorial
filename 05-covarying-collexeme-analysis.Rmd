@@ -16,7 +16,7 @@ colnames(d_scc)[1] <- ""
 
 knitr::kable(
   d_scc, booktabs = TRUE,
-  caption = 'Frequency information needed for simple collexeme analysis'
+  caption = 'Frequency information needed for distinctive collexeme analysis'
 )
 
 ```
@@ -30,7 +30,7 @@ colnames(d_scc)[1] <- ""
 
 knitr::kable(
   d_scc, booktabs = TRUE,
-  caption = 'Frequency information needed for simple collexeme analysis'
+  caption = 'Example contingency table for distinctive collexeme analysis'
 )
 
 ```
