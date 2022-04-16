@@ -4,7 +4,7 @@ author: "Stefan Hartmann"
 date: "`r Sys.Date()`"
 ---
 
-# Simple collexeme analysis
+# Simple collexeme analysis {#sca}
 
 Simple collexeme analysis investigates relationships between pairs of constructions, typically between a syntactic construction and a lexical item (Stefanowitsch 2013). It requires four values that are entered into a contingency table as shown in the table below: a) the frequency of a particular lexeme in a given construction; b) the frequency of all other lexemes in the same construction; c) the frequency of the lexeme in question outside of the given construction (i.e., in all other constructions); d) the frequency of all other lexemes outside of the construction. Table \@ref(tab:scctable) summarizes the input that is needed for each of the four cells.
 
@@ -47,6 +47,8 @@ tibble(
 
 
 ```
+
+(Note: If you see `kableExtra::kable()` or `DT::datatable()` anywhere in this tutorial, as in the function above, you can ignore it - those functions are just used to create the tables for the HTML file you're currently reading.)
 
 A simple collexeme analysis can be used to check which lexemes occur with above-chance frequency in this slot, and which lexemes are rarer than we would expect, given a chance distribution. Take, for example, the lexical item *hangover*. To compute the collostruction strength of *hangover*, we have to fill the four cells as shown in Table \@ref(tab:scctableexample).
 
@@ -95,13 +97,7 @@ encow[which(encow$Lemma=="hangover"),]
 
 ```
 
-Finally, we can compute the value for filling the fourth cell by obtaining the sum of all nouns in the corpus (from and then subtracting the values the fill the other cell of course). The total number of nouns in the corpus is `r sum(encow$Freq)`:
-
-```{r}
-
-sum(encow$Freq)
-
-```
+Finally, we can compute the value for filling the fourth cell by obtaining the sum of all nouns in the corpus (from and then subtracting the values the fill the other cell of course). The total number of nouns in the corpus is 4091470964 (this is the number we get from summing up the frequencies of lemmas tagged as nouns in the entire lemma frequency list linked above).
 
 It is, however, not always easy to decide which value should enter the fourth cell (collostructional analysis has sometimes been criticized for this, see e.g. Schmid & Küchenhoff 2013, Gries 2013). For example, regarding the  [*mother of all* N] construction, one could discuss whether the value of the fourth cell should be the frequency of *all* other nouns in the corpus, including proper names, or whether proper names should be excluded (especially if they are not attested in the construction, which could be seen as evidence that the construction does not readily combine with proper names). 
 

@@ -3,5 +3,6 @@ tab:scctableexample
 introduction
 what-is-collostructional-analysis
 conceptual-background
-simple-collexeme-analysis
+sca
+distinctive-collexeme-analysis
 references

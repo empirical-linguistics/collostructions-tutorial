@@ -11,6 +11,8 @@ Bergs, Alexander. 2019. What, if anything, is linguistic creativity? Gestalt The
 
 Flach, Susanne. 2017. collostructions: An R Implementation for the Family of Collostructional Methods.
 
+Goldberg, Adele E. 1995. Constructions: A Construction Grammar Approach to Argument Structure. Chicago, London: The University of Chicago Press.
+
 Gries, Stefan Th. 2015. More (old and new) misunderstandings of collostructional analysis: On Schmid and Küchenhoff (2013). Cognitive Linguistics 26(3). 505–536.
 
 Gries, Stefan Th. 2019. 15 years of collostructions: Some long overdue additions/corrections (to/of actually all sorts of corpus-linguistics measures). International Journal of Corpus Linguistics 24(3). 385–412.
@@ -30,6 +32,8 @@ Schmid, Hans-Jörg & Helmut Küchenhoff. 2013. Collostructional Analysis and oth
 Stefanowitsch, Anatol. 2013. Collostructional Analysis. In Thomas Hoffmann & Graeme Trousdale (eds.), The Oxford Handbook of Construction Grammar, 290–306. Oxford: Oxford University Press.
 
 Stefanowitsch, Anatol & Stefan Th. Gries. 2003. Collostructions: Investigating the Interaction of Words and Constructions. International Journal of Corpus Linguistics 8(2). 209–243.
+
+Uhrig, Peter. 2015. Why the Principle of No Synonymy is Overrated. Zeitschrift für Anglistik und Amerikanistik 63(3). 323–337.
 
 Ungerer, Tobias & Stefan Hartmann. 2020. Delineating extravagance: Assessing speakers’ perceptions of imaginative constructional patterns. Belgian Journal of Linguistics 34. 345–356.
 

@@ -1,0 +1,148 @@
+---
+title: 'Collostructional analysis: A short primer'
+author: "Stefan Hartmann"
+date: "`r Sys.Date()`"
+---
+
+# Distinctive collexeme analysis
+
+Construction Grammar has always been quite interested in so-called alternations, e.g. the so-called dative alternation between the ditransitive (or double-object) construction (*I gave her the book*) and the *to*-dative construction (*I gave the book to her*). Such alternations are interesting for a variety of reasons, one of them being the fact that Construction Grammarians tend to assume a "principle of non synonymy" (see Goldberg 1995, but see Uhrig 2015 for critical remarks). Comparing the slot fillers across constructions can help to get an impression of potentially quite subtle meaning differences between such near-synonymous constructions.
+
+To stick with the example of "snowclones", we could say that [*the mother of all* N] competes with the less "snowclony" [*the ADJ-est N ever/of all times*], even though an obvious differences between both constructions is of course that the [*mother of all* N] construction, while evoking an implicit superlative, leaves the way in which something is superlative underspecified. 
+
+Despite those differences, let us compare the N slots in the [*mother of all* N] construction and the [ADJ-*est* N *ever*] construction using distinctive collexeme analysis. The basic logic of distinctive collexeme analysis is very similar to that of simple collexeme analysis, except that we don't compare construction-internal and construction-external frequencies, but instead frequencies within two constructions. While this entails the obvious shortcoming that corpus frequencies are not taken into account, it can help get a clearer picture of the commonalities and differences of the two constructions.
+
+The basic contingency table for distinctive collemexe analysis is shown in Table \@ref(tab:dca_tbl).
+
+```{r dca_tbl}
+
+d_scc <- readxl::read_xlsx("data/overview_tables/distinctive_collexeme_analysis_overview.xlsx", sheet = 1)
+colnames(d_scc)[1] <- ""
+
+knitr::kable(
+  d_scc, booktabs = TRUE,
+  caption = 'Contingency table for distinctive collexeme analysis'
+)
+
+```
+
+Again, this table is easier to understand if we translate it to our example, i.e. the comparison between [*mother of all* N] and [ADJ-*est* N *ever*] (where we ignore the ADJ slot and only focus on the N slot):
+
+
+```{r dca_tbl2}
+
+d_scc <- readxl::read_xlsx("data/overview_tables/distinctive_collexeme_analysis_overview.xlsx", sheet = 2)
+colnames(d_scc)[1] <- ""
+
+knitr::kable(
+  d_scc, booktabs = TRUE,
+  caption = 'Example contingency table for distinctive collexeme analysis'
+)
+
+```
+
+
+Let us briefly work through this example. We already have the data for [*mother of all* N], but we still need the data for [ADJ-*est* N *ever*]. To obtain them, I have queried ENCOW16A via NoSketchEngine using the search query `"[tT]he" ".*est" [tag="N.*"] "ever"`. We import the results using the `getNSE` function from the package [`concordances`](https://hartmast.github.io/concordances/index.html), which is available via Github and which you can install using the following command:  
+
+```{r, eval=F}
+
+if(!is.element("devtools", installed.packages())) {
+  install.packages("devtools")
+}
+
+devtools::install_github("hartmast/concordances")
+
+```
+
+Now we load the package using
+
+```{r}
+
+library(concordances)
+
+```
+
+And we read in the data:
+
+```{r}
+
+ever <- getNSE("data/adj_est_n_ever/the_ADJest_N_ever.xml", xml = TRUE, tags = TRUE, context_tags = FALSE)
+
+```
+
+Now we have to extract the lemmas in the noun slot. The original data have lemma tags, and `getNSE` has extracted them for us to a separate column (named "Tag2_Key"):
+
+```{r}
+
+head(ever)
+
+```
+
+Thus, we just have to extract the third word in each row of the Tag2_Key column. Extracting the third word from a single character string is simple using the `strsplit` command:
+
+```{r}
+
+unlist(strsplit("The best function ever", 
+                split =  " "))[3] # whitespace as separator
+
+```
+
+We can apply this function over an entire vector, or in our case: a column of a dataframe, using `sapply`:
+
+
+```{r}
+
+ever_n <- sapply(1:nrow(ever), function(i) unlist(strsplit(ever$Tag2_Key[i], " "))[3])
+
+```
+
+From this list of nouns, we can create a frequency table:
+
+```{r}
+
+ever_n_tbl <- table(ever_n) %>% 
+  as_tibble() %>% 
+  setNames(c("Lemma", "Freq_ever")) %>% 
+  arrange(desc(Freq_ever)) # arrange in descending order
+
+head(ever_n_tbl)
+
+```
+
+We can now merge this with our table `tbl1` compiled in Section \@ref(sca).
+
+```{r}
+
+tbl1 <- left_join(tbl1, ever_n_tbl)
+
+head(tbl1)
+
+```
+
+There are of course some lexemes that occur only in one construction and not in the other, hence the NA's in the output. We can remove them using the `replace_na` function, and as this function takes a list as its argument, we can so so simultaneously for multiple columns:
+
+```{r}
+
+tbl1 <- tbl1 %>% replace_na(list(Freq_mother = 0, Freq_ever = 0))
+
+```
+
+Now we have all we need for a distinctive collexeme analysis. In the `collostructions` package, we can use `collex.dist` to perform a distinctive collexeme analysis. According to the package vignette (see `?collex.dist`), we have two options to pass our data to the function: "EITHER as aggregated frequencies with the types in column A (WORD), and the frequencies of WORD in the first construction in column 2 and in the frequencies of WORD in the second construction in column 3, OR as raw data, i.e., one observation per line, where column 1 must contain the construction types and column 2 must contain the collexeme."
+
+As we already have the frequency list, we go for the first option. In fact, we simply have to select the relevant columns from the `tbl1` dataframe and can pass them to `collex.dist`.
+
+```{r}
+
+tbl1 %>% select(Lemma, Freq_mother, Freq_ever) %>% collex.dist() %>% DT::datatable()
+
+```
+
+Again, we see that certain words like *battle, hangover, crisis* occur much more often in the [*mother of all* N] construction than in the [ADJ-*est* N *ever*] construction. We can reverse the list to take a look at the collexemes that rather tend to occur in the [ADJ-*est* N *ever*] construction:
+
+```{r}
+
+tbl1 %>% select(Lemma, Freq_mother, Freq_ever) %>% collex.dist(reverse = TRUE) %>% DT::datatable()
+
+```
+
+Comparing the distinctive collexemes of both constructions is quite instructive - overall, it seems as if [*mother of all* N] tends to combine more with abstract concepts and nouns denoting events, while [ADJ-*est* N *ever*] combines with terms that denote more concrete/individuated concepts like persons, objects, cultural products etc.
