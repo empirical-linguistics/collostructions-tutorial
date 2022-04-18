@@ -20,15 +20,3 @@ Collostructional analysis comes in three major variants:
 In Section \@ref{cba}, I will give a brief conceptual overview of the ideas behind collostructional analysis, its potential, and its limitations. The subsequent sections contain hands-on tutorials for each of the three variants of collostructional analysis, including extensions of distinctive collexeme analysis that allow for taking more than two constructions into account.
 
 The subsequent sections discuss the three major variants of collostructional analysis using hands-on examples. The datasets used there can be downloaded from the "data" folder in this tutorial's [Github repository](https://github.com/empirical-linguistics/collostructions-tutorial/tree/main/data).
-
-
-## What you will learn in this tutorial
-
-In this tutorial, you will learn how to perform simple collostructional analyses using Flach's (2021) [`collostructions`](https://sfla.ch/collostructions/) package. I will also illustrate some basic data wrangling procedures (and some slightly more complex ones). 
-
-
-## Prerequisites
-
-If you already know some R, it will be easier for you to follow this tutorial, but if not, don't worry - you don't have to understand everything immediately, the main goal of this tutorial is to give an impression of the steps you'll have to take when doing collostructional analysis in R, without, however, discussing every single step in detail. 
-
-In this tutorial, I will draw heavily on [`tidyverse`](https://www.tidyverse.org/) syntax. The Tidyverse is a family of packages implementing a couple of functions that make common data science tasks a bit easier. In order to follow this tutorial, you should therefore have the tidyverse packages installed (you cann install all of them via `install.packages("tidyverse")`).

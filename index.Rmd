@@ -15,3 +15,15 @@ This tutorial provides a very short introduction to collostructional analysis, a
 
 I will first give a brief overview of the method and then discuss a few case studies. For the hands-on part of the tutorial, we will use  [R](https://r-project.org) as well as Flach's (2021) [collostructions](https://sfla.ch/collostructions/) package. Note that the collostructions package is not (yet) available from CRAN. Please follow the installation instructions on the website to install it.
 
+
+
+## What you will learn in this tutorial
+
+In this tutorial, you will learn how to perform simple collostructional analyses using Flach's (2021) [`collostructions`](https://sfla.ch/collostructions/) package. I will also illustrate some basic data wrangling procedures (and some slightly more complex ones). 
+
+
+## Prerequisites
+
+If you already know some R, it will be easier for you to follow this tutorial, but if not, don't worry - you don't have to understand everything immediately, the main goal of this tutorial is to give an impression of the steps you'll have to take when doing collostructional analysis in R, without, however, discussing every single step in detail. 
+
+In this tutorial, I will draw heavily on [`tidyverse`](https://www.tidyverse.org/) syntax. The Tidyverse is a family of packages implementing a couple of functions that make common data science tasks a bit easier. In order to follow this tutorial, you should therefore have the tidyverse packages installed (you cann install all of them via `install.packages("tidyverse")`).

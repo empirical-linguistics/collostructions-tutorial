@@ -4,9 +4,9 @@ tab:ccatable1
 tab:ccatable2
 fig:unnamed-chunk-26
 introduction
-what-is-collostructional-analysis
 what-you-will-learn-in-this-tutorial
 prerequisites
+what-is-collostructional-analysis
 cba
 sca
 distinctive-collexeme-analysis
