@@ -1,0 +1,21 @@
+project:
+  type: book
+  execute-dir: project
+  output-dir: docs
+
+book:
+  title: "Collostructional analysis - A short primer"
+  author: "Stefan Hartmann"
+  date: "2022-04-18"
+  chapters:
+    - index.qmd
+    - 01-what-is-CA.qmd
+    - 02-conceptual-background.qmd
+    - 03-simple-collexeme-analysis.qmd
+    - 04-distinctive-collexeme-analysis.qmd
+    - 05-covarying-collexeme-analysis.qmd
+    - 0z-references.qmd
+
+format:
+  html:
+    theme: cosmo

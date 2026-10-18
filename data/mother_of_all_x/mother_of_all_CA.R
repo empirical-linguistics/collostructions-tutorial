@@ -1,23 +1,29 @@
 library(tidyverse)
 library(collostructions)
 library(data.table)
-
+library(vroom)
 
 # read data ---------------------------------------------------------------
-d <- read_csv("mother_of_all_ENCOW.csv")
+d <- read_csv("data/mother_of_all_x/mother_of_all_ENCOW.csv")
 
 
 # read DECOW frequency list -----------------------------------------------
 # (available from https://www.webcorpora.org/opendata/frequencies/english/encow16a/)
-encow <- fread("../encow16ax.lp.tsv",
-               header = F)
+encow <- vroom("data/encow16ax.lp.tsv", 
+               col_names = c("Lemma", "POS", "Freq"))
+# encow <- fread("../encow16ax.lp.tsv",
+#                header = F)
 
 # only nouns
-encow <- encow[V2 %in% c("NN", "NE")]
-colnames(encow) <- c("Lemma", "POS", "Freq")
+encow <- filter(encow, POS %in% c("NN", "NE"))
+
 
 # if something is attested both as NN and
 # NE, sum them up
+encow[encow$POS %in% c("NN", 
+                                               "NNS", 
+                                               "NNP", 
+                                               "NNPS"),]$Freq 
 encow <- encow[, sum(Freq), by = Lemma]
 setnames(encow, old = "V1", new = "Freq")
 
