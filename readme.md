@@ -2,7 +2,7 @@
 
 This repository contains a tutorial on collostructional analysis (see e.g. Stefanowitsch 2013). It is still work-on-progress. The link to the full tutorial will be added here shortly.
 
-This tutorial uses data from [ENCOW](corporafromtheweb.org/) (Schäfer & Bildhauer 2012), including the CC-BY [wordlists](https://www.webcorpora.org/opendata/frequencies/english/encow16a/).
+This tutorial uses data from the ([now-offline](https://rolandschaefer.net/archives/3663)) [ENCOW](https://web.archive.org/web/20210924132944/https://corporafromtheweb.org/encow16/) (Schäfer & Bildhauer 2012) corpus, including the CC-BY [wordlists](https://github.com/empirical-linguistics/encow_frequency_lists).
 
 
 # References 
